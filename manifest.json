@@ -1,0 +1,19 @@
+{
+  "name": "HUNG AIM",
+  "short_name": "HUNG AIM",
+  "description": "HUNG AIM - Key Verification",
+  "start_url": "./user_final_pwa.html",
+  "scope": "./",
+  "display": "standalone",
+  "orientation": "portrait",
+  "background_color": "#050506",
+  "theme_color": "#ff1744",
+  "icons": [
+    {
+      "src": "1787304901999.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any maskable"
+    }
+  ]
+}

@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<meta name="theme-color" content="#ff1744">
+<title>HUNG AIM</title>
+<style>
+*{box-sizing:border-box;-webkit-tap-highlight-color:transparent} :root{--neon:#ff1744;--neon2:#ff3d5a;--bg:#050506;--panel:#0d0b0d;--line:#35121a;--muted:#806d73;color-scheme:dark}html,body{margin:0;min-height:100%;font-family:Arial,sans-serif;background:radial-gradient(circle at 50% -10%,#4a0010 0,#090609 35%,#030303 80%);color:#fff}button,input{font:inherit}.hidden{display:none!important}
+#loginScreen{min-height:100vh;display:flex;align-items:center;justify-content:center;padding:20px}.login{width:100%;max-width:370px;padding:28px 22px;border:1px solid #541521;border-radius:22px;background:linear-gradient(145deg,#16090d,#070607);box-shadow:0 0 30px #ff174433}.logo{width:70px;height:70px;margin:auto;border-radius:17px;border:1px solid #ff174466;display:grid;place-items:center;color:var(--neon);font-size:24px;font-weight:900;box-shadow:0 0 20px #ff174444;overflow:hidden}.logo img{width:100%;height:100%;object-fit:cover;display:block}.title{text-align:center;margin-top:15px;font-size:24px;font-weight:900;text-shadow:0 0 12px var(--neon)}.sub{text-align:center;color:var(--muted);font-size:9px;letter-spacing:2px;margin-top:5px}.input{width:100%;height:48px;margin-top:22px;padding:0 12px;outline:none;border:1px solid #46141d;border-radius:11px;background:#080708;color:#fff;text-align:center;font-family:monospace}.input:focus{border-color:var(--neon);box-shadow:0 0 12px #ff174440}.mainBtn,.getKeyBtn{width:100%;height:48px;margin-top:9px;border-radius:11px}.mainBtn{border:1px solid var(--neon);background:linear-gradient(135deg,var(--neon),#85051e);color:#fff;font-weight:bold;box-shadow:0 0 15px #ff174455}.getKeyBtn{display:flex;align-items:center;justify-content:center;border:1px solid #43131b;background:#0d090b;color:var(--neon2);text-decoration:none;font-size:10px;font-weight:bold}#error{min-height:20px;margin-top:9px;color:#ff5b72;text-align:center;font-size:9px}
+#app{display:none;min-height:100vh}.header{position:sticky;top:0;z-index:500;height:65px;padding:0 15px;display:flex;align-items:center;justify-content:space-between;background:#090709ee;border-bottom:1px solid #35121a;backdrop-filter:blur(10px)}.brand{display:flex;align-items:center;gap:9px}.brandMark{width:37px;height:37px;border-radius:10px;border:1px solid #ff174466;display:grid;place-items:center;color:var(--neon);font-weight:900;overflow:hidden}.brandMark img{width:100%;height:100%;object-fit:cover;display:block}.brandName{font-size:12px;font-weight:900}.status{margin-top:3px;color:#ff536b;font-size:7px}.page{width:100%;max-width:430px;margin:auto;padding:16px}.account{padding:15px;margin-bottom:16px;border:1px solid #3a121a;border-radius:15px;background:#0c090b;box-shadow:0 0 15px #ff174411}.accountTop{display:flex;justify-content:space-between}.account b{font-size:10px}.badge{padding:5px 9px;border-radius:6px;background:#ff174422;color:var(--neon2);font-size:8px;font-weight:bold}.keyText,.remaining{margin-top:8px;color:#75646a;font:8px monospace}.remaining{font-family:Arial}.remaining b{color:var(--neon2)}
+.feature{padding:13px;margin-top:9px;border:1px solid #32121a;border-radius:13px;background:#0b080a}.featureRow{display:flex;align-items:center;gap:10px}.featureInfo{flex:1}.featureName{font-size:9px;font-weight:bold}.featureDesc{margin-top:4px;color:#705d63;font-size:7px}.menuIcon{width:43px;height:43px;display:grid;place-items:center;flex-shrink:0;border-radius:11px;background:#ff174411;border:1px solid #48141e;font-size:19px}.lockIcon{font-size:15px;color:#9b7b82}.locked{opacity:.58}.switch{position:relative;width:42px;height:23px;flex-shrink:0}.switch input{display:none}.slider{position:absolute;inset:0;border-radius:30px;background:#241b1e}.slider:before{content:"";position:absolute;width:17px;height:17px;left:3px;top:3px;border-radius:50%;background:#786a6f;transition:.2s}.switch input:checked+.slider{background:var(--neon);box-shadow:0 0 10px #ff174455}.switch input:checked+.slider:before{transform:translateX(19px);background:#fff}.feature.vipUnlocked{opacity:1;border-color:#ff174455}.feature.vipUnlocked .switch{opacity:1}.feature.clickable{cursor:pointer}.feature.clickable:active{transform:scale(.99)}
+#maintenance{position:fixed;inset:0;display:none;align-items:center;justify-content:center;padding:20px;background:#000c;z-index:3000;text-align:center}.maintenanceBox{width:100%;max-width:360px;padding:30px 20px;border:1px solid #ff174466;border-radius:18px;background:#0e090b;box-shadow:0 0 30px #ff174444}.maintenanceBox h2{color:var(--neon2);font-size:18px}.maintenanceBox p{color:#806e74;font-size:9px;line-height:1.7}.popup{position:fixed;inset:0;display:none;align-items:center;justify-content:center;padding:20px;background:#000c;z-index:2000}.popup.show{display:flex}.popupBox{width:100%;max-width:330px;padding:23px;border:1px solid #ff174466;border-radius:18px;background:#0e090b;box-shadow:0 0 30px #ff174444;text-align:center}.popupIcon{font-size:30px}.popupBox h3{margin:10px 0 6px;font-size:15px}.popupBox p{margin:0;color:#806e74;font-size:9px;line-height:1.6}.popupBox button{width:100%;height:40px;margin-top:15px;border:1px solid var(--neon);border-radius:9px;background:var(--neon);color:#fff;font-weight:bold}
+
+/* SETTINGS + NOTIFICATION */
+.iconBtn{position:relative;width:38px;height:38px;border:1px solid #4b151f;border-radius:10px;background:#10090b;color:#fff}
+.badge{position:absolute;right:-5px;top:-5px;min-width:17px;height:17px;padding:0 4px;border-radius:20px;background:var(--neon);color:#fff;font-size:8px;font-weight:bold;display:flex;align-items:center;justify-content:center;box-shadow:0 0 9px #ff1744}
+.shake{animation:shake .45s infinite}@keyframes shake{0%,100%{transform:rotate(0)}25%{transform:rotate(-10deg)}50%{transform:rotate(10deg)}75%{transform:rotate(-7deg)}}
+.settingsPage{display:none;position:fixed;inset:0;z-index:1000;overflow:auto;background:radial-gradient(circle at 50% -10%,#4a0010 0,#090609 35%,#030303 80%);padding:16px}.settingsBox{width:100%;max-width:430px;margin:auto}.settingsHead{display:flex;align-items:center;gap:10px;margin-bottom:15px}.backBtn{width:38px;height:38px;border:1px solid #4b151f;border-radius:10px;background:#10090b;color:#fff}.settingCard{padding:15px;margin-bottom:10px;border:1px solid #32121a;border-radius:13px;background:#0b080a}.settingTitle{font-size:10px;font-weight:bold}.settingDesc{margin-top:5px;color:#705d63;font-size:8px}.colors{display:flex;gap:9px;margin-top:12px}.colorDot{width:32px;height:32px;border-radius:9px;border:2px solid transparent}.colorDot.active{border-color:#fff;box-shadow:0 0 10px currentColor}.settingInput{width:100%;height:45px;margin-top:9px;padding:0 11px;border:1px solid #46141d;border-radius:10px;background:#080708;color:#fff;outline:none}.settingTextarea{width:100%;min-height:105px;padding:11px;margin-top:9px;border:1px solid #46141d;border-radius:10px;background:#080708;color:#fff;outline:none;resize:vertical}.notifyBox{position:fixed;right:14px;top:73px;width:min(360px,calc(100% - 28px));z-index:1600;padding:16px;border:1px solid #ff174466;border-radius:15px;background:#0e090b;box-shadow:0 0 25px #ff174444}.notifyTitle{color:var(--neon2);font-size:11px;font-weight:bold}.notifyText{margin-top:8px;color:#ccc;font-size:9px;line-height:1.6;white-space:pre-wrap}.notifyBtn{width:100%;height:38px;margin-top:11px;border:1px solid var(--neon);border-radius:9px;background:var(--neon);color:#fff;font-size:9px;font-weight:bold}
+</style>
+
+<link rel="manifest" href="manifest.json">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="HUNG AIM">
+<link rel="icon" type="image/png" sizes="512x512" href="1787304901999.png">
+<link rel="apple-touch-icon" href="1787304901999.png">
+
+</head>
+<body>
+<section id="loginScreen"><div class="login"><div class="logo"><img src="1787304901999.png" width="512" height="512" alt="HUNG AIM"></div><div class="title">HUNG AIM</div><div class="sub">KEY VERIFICATION</div><input id="keyInput" class="input" placeholder="NHẬP KEY" autocomplete="off" autocapitalize="characters"><button id="loginBtn" class="mainBtn">XÁC MINH KEY</button><a class="getKeyBtn" href="https://trummobanacc.github.io/lay-key-/" target="_blank" rel="noopener">🔑 LẤY KEY</a><div id="error"></div></div></section>
+<div id="app"><header class="header"><div class="brand"><div class="brandMark"><img src="1787304901999.png" width="512" height="512" alt="HUNG AIM"></div><div><div class="brandName">HUNG AIM</div><div class="status">● SERVER ONLINE</div></div></div><div style="display:flex;gap:7px"><button id="notifyBtn" class="iconBtn" onclick="toggleNotifications()">🔔<span id="notifyBadge" class="badge hidden">0</span></button><button class="iconBtn" onclick="openSettings()">⚙️</button></div></header>
+<section class="page">
+<div class="account"><div class="accountTop"><b>TÀI KHOẢN</b><span id="keyType" class="badge">FREE</span></div><div id="keyDisplay" class="keyText">KEY: —</div><div class="remaining">THỜI GIAN: <b id="timeLeft">00:00:00</b></div></div>
+
+<div class="feature clickable" onclick="toggleBasic('aimlockToggle')"><div class="featureRow"><div class="menuIcon">🎯</div><div class="featureInfo"><div class="featureName">AIMLOCK</div><div class="featureDesc">Chức năng chính</div></div><label class="switch" onclick="event.stopPropagation()"><input id="aimlockToggle" type="checkbox"><span class="slider"></span></label></div></div>
+
+<div id="aimdragFeature" class="feature locked"><div class="featureRow"><div class="menuIcon">🎯</div><div class="featureInfo"><div class="featureName">AIMDRAG</div><div class="featureDesc">AIM TRÊN ĐẦU · KEY VIP</div></div><label class="switch"><input id="aimdragToggle" type="checkbox" disabled><span class="slider"></span></label></div></div>
+<div id="antennaFeature" class="feature locked"><div class="featureRow"><div class="menuIcon">📡</div><div class="featureInfo"><div class="featureName">ANTENA + AIMDRAG</div><div class="featureDesc">KEY VIP</div></div><label class="switch"><input id="antennaToggle" type="checkbox" disabled><span class="slider"></span></label></div></div>
+<div id="bodyFeature" class="feature locked"><div class="featureRow"><div class="menuIcon">👤</div><div class="featureInfo"><div class="featureName">AIMBODY</div><div class="featureDesc">KEY VIP</div></div><label class="switch"><input id="bodyToggle" type="checkbox" disabled><span class="slider"></span></label></div></div>
+<div id="magicFeature" class="feature locked"><div class="featureRow"><div class="menuIcon">✨</div><div class="featureInfo"><div class="featureName">AIM MAGIC</div><div class="featureDesc">KEY VIP</div></div><label class="switch"><input id="magicToggle" type="checkbox" disabled><span class="slider"></span></label></div></div>
+
+<div class="feature"><div class="featureRow"><div class="menuIcon">〰️</div><div class="featureInfo"><div class="featureName">SMOOTH</div><div class="featureDesc">FREE</div></div><label class="switch"><input id="smoothToggle" type="checkbox"><span class="slider"></span></label></div></div>
+<div class="feature"><div class="featureRow"><div class="menuIcon">🪶</div><div class="featureInfo"><div class="featureName">NHẸ TÂM</div><div class="featureDesc">FREE</div></div><label class="switch"><input id="lightToggle" type="checkbox"><span class="slider"></span></label></div></div>
+
+<div class="feature clickable" onclick="comingSoon()"><div class="featureRow"><div class="menuIcon">📱</div><div class="featureInfo"><div class="featureName">PROXY ANDROID</div><div class="featureDesc">COMING SOON</div></div><div class="arrow">›</div></div></div>
+</section></div>
+
+<section id="settingsPage" class="settingsPage"><div class="settingsBox"><div class="settingsHead"><button class="backBtn" onclick="closeSettings()">←</button><div class="title" style="margin:0;font-size:17px">CÀI ĐẶT</div></div><div class="settingCard"><div class="settingTitle">🎨 ĐỔI MÀU NỀN</div><div class="settingDesc">Vẫn giữ phong cách neon. Mặc định đỏ neon.</div><div class="colors"><button class="colorDot active" style="background:#ff1744;color:#ff1744" onclick="setTheme('#ff1744',this)"></button><button class="colorDot" style="background:#00e5ff;color:#00e5ff" onclick="setTheme('#00e5ff',this)"></button><button class="colorDot" style="background:#00ff66;color:#00ff66" onclick="setTheme('#00ff66',this)"></button><button class="colorDot" style="background:#b000ff;color:#b000ff" onclick="setTheme('#b000ff',this)"></button><button class="colorDot" style="background:#ffea00;color:#ffea00" onclick="setTheme('#ffea00',this)"></button></div></div><div class="settingCard"><div class="settingTitle">📝 KHIẾU NẠI</div><div class="settingDesc">Key đang sử dụng được hệ thống tự điền.</div><input id="complaintKey" class="settingInput" readonly placeholder="Key đang sử dụng"><input id="complaintName" class="settingInput" maxlength="40" placeholder="Nhập tên"><textarea id="complaintText" class="settingTextarea" maxlength="1000" placeholder="Nhập khiếu nại"></textarea><button class="mainBtn" onclick="sendComplaint()">GỬI KHIẾU NẠI</button></div></div></section>
+<div id="notifyPopup" class="notifyBox hidden"><div id="notifyTitle" class="notifyTitle">🔔 THÔNG BÁO ADMIN</div><div id="notifyText" class="notifyText"></div><button class="notifyBtn" onclick="markNotificationRead()">✓ ĐÃ ĐỌC</button></div>
+<div id="popup" class="popup"><div class="popupBox"><div id="popupIcon" class="popupIcon">🔒</div><h3 id="popupTitle">KEY KHÔNG KHẢ DỤNG</h3><p id="popupText">Chức năng này chỉ dành cho KEY VIP.</p><button onclick="closePopup()">ĐÓNG</button></div></div>
+<div id="maintenance"><div class="maintenanceBox"><div style="font-size:40px">🛠️</div><h2>BẢO TRÌ HỆ THỐNG</h2><p id="maintenanceText">Hệ thống đang được bảo trì. Vui lòng quay lại sau.</p></div></div>
+
+<script type="module">
+import {initializeApp} from "https://www.gstatic.com/firebasejs/12.3.0/firebase-app.js";
+import {getDatabase,ref,get,onValue,push,update} from "https://www.gstatic.com/firebasejs/12.3.0/firebase-database.js";
+const firebaseConfig={apiKey:"AIzaSyD51LwWlV5qV-RjD7HCFSqWtyucdh-V21Y",authDomain:"admin-53f18.firebaseapp.com",databaseURL:"https://admin-53f18-default-rtdb.firebaseio.com",projectId:"admin-53f18",storageBucket:"admin-53f18.firebasestorage.app",messagingSenderId:"745621699049",appId:"1:745621699049:web:3c9cef5c5b572df9987378",measurementId:"G-H7BZ2J790S"};
+const app=initializeApp(firebaseConfig),db=getDatabase(app);let currentKey="",keyData=null,expireAt=0,timer=null,latestNotificationId=null,readNotifications=JSON.parse(localStorage.getItem("hungAimRead")||"[]");
+const deviceId=localStorage.getItem("hungAimDeviceId")||crypto.randomUUID();localStorage.setItem("hungAimDeviceId",deviceId);
+const $=id=>document.getElementById(id);
+function isVIP(){return String(keyData?.type||"FREE").toUpperCase()==="VIP"}
+function showPopup(i,t,m){$("popupIcon").textContent=i;$("popupTitle").textContent=t;$("popupText").textContent=m;$("popup").classList.add("show")}
+window.closePopup=()=>$("popup").classList.remove("show");
+window.comingSoon=()=>showPopup("📱","PROXY ANDROID","COMING SOON");
+window.vipFeature=name=>{if(!isVIP()){showPopup("🔒","KEY KHÔNG KHẢ DỤNG","Chức năng "+name+" chỉ dành cho KEY VIP.");return}showPopup("👑","VIP","Đã mở "+name+".")};
+window.toggleBasic=id=>{$(id).checked=!$(id).checked};
+function applyPermissions(){const vip=isVIP();[["aimdragFeature","aimdragToggle"],["antennaFeature","antennaToggle"],["bodyFeature","bodyToggle"],["magicFeature","magicToggle"]].forEach(([f,t])=>{$(f).classList.toggle("vipUnlocked",vip);$(f).classList.toggle("locked",!vip);$(t).disabled=!vip;});}
+function updateTimer(){if(!expireAt){$("timeLeft").textContent="Không giới hạn";return}const r=expireAt-Date.now();if(r<=0){logout("Key đã hết hạn.");return}const s=Math.floor(r/1000),h=Math.floor(s/3600),m=Math.floor((s%3600)/60),sec=s%60;$("timeLeft").textContent=String(h).padStart(2,"0")+":"+String(m).padStart(2,"0")+":"+String(sec).padStart(2,"0")}
+function enterApp(){$("loginScreen").style.display="none";$("app").style.display="block";$("keyDisplay").textContent="KEY: "+currentKey;$("keyType").textContent=keyData.type||"FREE";updateTimer();clearInterval(timer);timer=setInterval(updateTimer,1000);applyPermissions();listenKeyRealtime();listenServer();listenNotifications();$("complaintKey").value=currentKey;showPopup("🔑","NHẬN DIỆN KEY","Key "+(keyData.type||"FREE")+" đã được xác minh thành công.")}
+
+async function verify(){
+    const input=$("keyInput").value.trim();
+    const error=$("error");
+    if(!input){error.textContent="Vui lòng nhập key.";return}
+    const btn=$("loginBtn");
+    btn.disabled=true;
+    btn.textContent="ĐANG XÁC MINH...";
+    try{
+        const snap=await get(ref(db,"keys/" + input));
+        if(!snap.exists()){
+            error.textContent="Key không tồn tại.";
+            return;
+        }
+        const data=snap.val();
+        if(data.active===false||data.locked===true){error.textContent="Key đã bị khóa.";return}
+        if(data.deviceId&&data.deviceId!==deviceId){error.textContent="Key đã liên kết thiết bị khác.";return}
+        const expiry=Number(data.expiresAt||0);
+        if(expiry&&expiry<=Date.now()){
+            error.textContent="Key đã hết hạn.";
+            return;
+        }
+        currentKey=input;
+        if(!data.deviceId){await update(ref(db,"keys/"+input),{deviceId:deviceId});data.deviceId=deviceId;}
+        keyData=data;
+        expireAt=expiry;
+        enterApp();
+    }catch(e){
+        console.error(e);
+        error.textContent="Không kết nối được Firebase.";
+    }finally{
+        btn.disabled=false;
+        btn.textContent="XÁC MINH KEY";
+    }
+}
+
+$("loginBtn").addEventListener("click",verify);$("keyInput").addEventListener("keydown",e=>{if(e.key==="Enter")verify()});
+
+function listenKeyRealtime(){
+    onValue(ref(db,"keys/" + currentKey),snap=>{
+        if(!snap.exists()){logout("Key đã bị xóa.");return}
+        const found=snap.val();
+        if(found.active===false||found.locked===true){logout("Key đã bị khóa.");return}
+        if(found.deviceId&&found.deviceId!==deviceId){logout("Key đã liên kết thiết bị khác.");return}
+        const expiry=Number(found.expiresAt||0);
+        if(expiry&&expiry<=Date.now()){logout("Key đã hết hạn.");return}
+        keyData=found;
+        expireAt=expiry;
+        $("keyType").textContent=found.type||"FREE";
+        applyPermissions();
+    });
+}
+
+function listenServer(){onValue(ref(db,"settings/maintenance"),snap=>{const v=snap.val();const enabled=v===true||(v&&v.enabled===true);$("maintenance").style.display=enabled?"flex":"none";if(v&&typeof v==='object'&&v.message)$("maintenanceText").textContent=v.message})}
+function openSettings(){$("settingsPage").style.display="block";$('complaintKey').value=currentKey}
+window.openSettings=openSettings;function closeSettings(){$("settingsPage").style.display="none"}window.closeSettings=closeSettings;
+window.setTheme=(c,b)=>{document.documentElement.style.setProperty("--neon",c);document.documentElement.style.setProperty("--neon2",c);localStorage.setItem("hungAimColor",c);document.querySelectorAll(".colorDot").forEach(x=>x.classList.remove("active"));b.classList.add("active")};
+const savedColor=localStorage.getItem("hungAimColor");if(savedColor){document.documentElement.style.setProperty("--neon",savedColor);document.documentElement.style.setProperty("--neon2",savedColor)}
+window.toggleNotifications=()=>$("notifyPopup").classList.toggle("hidden");
+function listenNotifications(){onValue(ref(db,"notifications"),snap=>{if(!snap.exists()){$("notifyBadge").classList.add("hidden");$("notifyBtn").classList.remove("shake");return}const obj=snap.val()||{};const items=Object.entries(obj).map(([id,v])=>({id,...v})).filter(x=>x&&x.active!==false).sort((a,b)=>Number(b.createdAt||0)-Number(a.createdAt||0));const unread=items.filter(x=>!readNotifications.includes(x.id));if(!unread.length){$("notifyBadge").classList.add("hidden");$("notifyBtn").classList.remove("shake");return}const n=unread[0];latestNotificationId=n.id;$("notifyBadge").textContent=unread.length>99?"99+":unread.length;$("notifyBadge").classList.remove("hidden");$("notifyBtn").classList.add("shake");$("notifyTitle").textContent="🔔 "+(n.title||"THÔNG BÁO ADMIN");$("notifyText").textContent=n.message||n.text||"";$("notifyPopup").classList.remove("hidden")})}
+window.markNotificationRead=()=>{if(latestNotificationId&&!readNotifications.includes(latestNotificationId)){readNotifications.push(latestNotificationId);localStorage.setItem("hungAimRead",JSON.stringify(readNotifications))}$("notifyPopup").classList.add("hidden")};
+window.sendComplaint=()=>{const name=$("complaintName").value.trim(),message=$("complaintText").value.trim();if(!name||!message){showPopup("📝","THIẾU THÔNG TIN","Vui lòng nhập tên và nội dung khiếu nại.");return}push(ref(db,"complaints"),{key:currentKey,name,message,createdAt:Date.now(),status:"pending"}).then(()=>{$("complaintName").value="";$("complaintText").value="";showPopup("✓","ĐÃ GỬI","Khiếu nại đã được gửi tới Admin.")}).catch(()=>showPopup("❌","LỖI","Không thể gửi khiếu nại."))};
+function logout(message){clearInterval(timer);currentKey="";keyData=null;expireAt=0;$("app").style.display="none";$("loginScreen").style.display="flex";$("keyInput").value="";$("error").textContent=message||""}
+</script>
+
+<script>
+if ("serviceWorker" in navigator) {
+  window.addEventListener("load", () => {
+    navigator.serviceWorker.register("./sw.js")
+      .catch(err => console.error("Service Worker:", err));
+  });
+}
+</script>
+
+</body>
+
+</html>
